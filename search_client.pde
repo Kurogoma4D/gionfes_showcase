@@ -47,6 +47,11 @@ public class SearchClient {
             tweets.add(new TweetData(data));
         }
 
+        for (TweetData o : tweets) {
+            println(o.id);
+        }
+        println("\n");
+
         return tweets;
     }
 }

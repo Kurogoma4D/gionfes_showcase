@@ -9,6 +9,7 @@ LinkedList<TweetTile> tweets;
 boolean isUpdating = false;
 boolean isKeyPressed = false;
 ArrayList<String> images = new ArrayList<String>();
+ArrayList<TweetData> list = new ArrayList<TweetData>();
 PFont font;
 
 void setup() {
@@ -30,23 +31,27 @@ void draw() {
 
     if (isKeyPressed == true && isUpdating == false) {
         isUpdating = true;
+        requestTweet();
+    }
+    if (isUpdating == false) {
         updateTweet();
     }
     if (tweets.size() != 0) {
         for (TweetTile tweet : tweets) {
             tweet.draw();
-            g.removeCache(tweet.backgroundImage);
         }
-        System.gc();
     }
 
     fill(255);
     text(str(frameRate), 18, pixelHeight - 30);
 }
 
-void updateTweet() {
-    ArrayList<TweetData> list = client.request();
+void requestTweet() {
+    list = client.request();
+    isUpdating = false;
+}
 
+void updateTweet() {
     for (int i = 0; i < list.size(); i++) {
         TweetData newTweet = list.get(i);
         if (tweets.size() < 5) {
@@ -71,8 +76,6 @@ void updateTweet() {
         Collections.shuffle(images);
         display.updateImage(images.get(0));
     }
-
-    isUpdating = false;
 }
 
 void keyPressed() {
