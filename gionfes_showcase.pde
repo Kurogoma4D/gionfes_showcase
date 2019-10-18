@@ -8,9 +8,11 @@ Display display;
 LinkedList<TweetTile> tweets;
 boolean isUpdating = false;
 boolean isKeyPressed = false;
+boolean updateFlag = false;
 ArrayList<String> images = new ArrayList<String>();
 LinkedList<TweetData> list = new LinkedList<TweetData>();
 PFont font;
+int baseTime = 0;
 
 void setup() {
     // size(1280, 720);
@@ -24,16 +26,19 @@ void setup() {
     tweets = new LinkedList<TweetTile>();
     font = createFont("IPAexGothic", 18, true);
     display.setup();
+    baseTime = millis();
 }
 
 void draw() {
     display.draw();
 
-    if (isKeyPressed == true && isUpdating == false) {
+    int now = millis();
+    if (now - baseTime > 15000 && isUpdating == false) {
+        baseTime = now;
         isUpdating = true;
         thread("requestTweet");
     }
-    if (isUpdating == false) {
+    if (isUpdating == false && updateFlag == true) {
         updateTweet();
     }
     if (tweets.size() != 0) {
@@ -43,36 +48,23 @@ void draw() {
     }
 
     fill(255);
-    text(str(frameRate), 18, pixelHeight - 30);
+    text(baseTime + "  " + now + "  " + frameRate, 18, pixelHeight - 24);
 }
 
 void requestTweet() {
     list = client.request();
     isUpdating = false;
+    updateFlag = true;
 }
 
 void updateTweet() {
+    LinkedList<TweetTile> newTweets = new LinkedList<TweetTile>();
+
     for (int i = 0; i < list.size(); i++) {
         TweetData newTweet = list.get(i);
-        if (tweets.size() < 5) {
-            // if (newTweet.id == tweets.get(i).getData().id) break;
-            tweets.offerFirst(new TweetTile(4-i, newTweet));
-        } else {
-            tweets.removeLast();
-            tweets.offerFirst(new TweetTile(0, newTweet));
-        }
+        newTweets.add(new TweetTile(i, newTweet));
     }
 
-    for (int j = 0; j < tweets.size(); j++) {
-        TweetTile prev = tweets.get(j);
-        tweets.set(j, new TweetTile(4-j, prev.getData()));
-    }
-}
-
-void keyPressed() {
-    isKeyPressed = true;
-}
-
-void keyReleased() {
-    isKeyPressed = false;
+    tweets = newTweets;
+    updateFlag = false;
 }
