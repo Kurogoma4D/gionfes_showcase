@@ -4,7 +4,7 @@ public class TweetData {
     public String name;
     public String screenName;
     public String profileImageUrl;
-    public String mediaUrl;
+    public PImage media;
 
     TweetData(StringDict props){
         id = props.get("id");
@@ -12,6 +12,9 @@ public class TweetData {
         name = props.get("name");
         screenName = props.get("screenName");
         profileImageUrl = props.get("profileImageUrl");
-        mediaUrl = props.get("mediaUrl");
+        String url = props.get("mediaUrl");
+        if (url != "") {
+            media = loadImage(url);
+        }
     }
 }

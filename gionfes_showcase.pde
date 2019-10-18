@@ -63,18 +63,9 @@ void updateTweet() {
         }
     }
 
-    images.clear();
     for (int j = 0; j < tweets.size(); j++) {
         TweetTile prev = tweets.get(j);
         tweets.set(j, new TweetTile(4-j, prev.getData()));
-        String media = prev.getData().mediaUrl;
-        if (media != "") {
-            images.add(media);
-        }
-    }
-    if (images.size() != 0) {
-        Collections.shuffle(images);
-        display.updateImage(images.get(0));
     }
 }
 

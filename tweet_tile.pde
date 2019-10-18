@@ -7,7 +7,6 @@ class TweetTile {
     public float height;
     private float margin = 36;
     private float horizontalMargin = 150;
-    public PImage backgroundImage = null;
     private float base = 20;
 
     TweetTile(int index, TweetData data) {
@@ -18,20 +17,17 @@ class TweetTile {
         this.height = (pixelHeight - this.margin * 6) / 5.0;
         this.x = this.horizontalMargin;
         this.y = (this.height + this.margin) * index + this.margin;
-        if (data.mediaUrl != "") {
-            this.backgroundImage = loadImage(data.mediaUrl);
-        }
     }
 
     public void draw() {
         fill(255, 200);
         noStroke();
         rect(this.x, this.y, this.width, this.height, 8);
-        if (this.backgroundImage != null) {
+        if (this.data.media != null) {
             imageMode(CORNER);
-            this.backgroundImage.resize(0, int(this.height));
+            this.data.media.resize(0, int(this.height));
             tint(255, 180);
-            image(this.backgroundImage, (this.width - this.backgroundImage.width - 8 + this.x), this.y);
+            image(this.data.media, (this.width - this.data.media.width - 8 + this.x), this.y);
         }
         textFont(font, 18);
         fill(0);
