@@ -29,14 +29,14 @@ class TweetTile {
             tint(255, 180);
             image(this.data.media, (this.width - this.data.media.width - 8 + this.x), this.y);
         }
-        textFont(font, 18);
+        textFont(font, 16);
         fill(0);
-        text(this.data.text, this.x + 16, this.y + this.height / 3 + 12, this.width - 16, this.height);
-        textSize(22);
+        text(this.data.text, this.x + 16, this.y + this.height / 3 + 12, this.width - 22, this.height * 2 / 3);
+        textSize(20);
         text(this.data.name, this.x + 16, this.y + 36);
         fill(120);
         float nameWidth = textWidth(this.data.name);
-        textSize(18);
+        textSize(16);
         text(" @"+this.data.screenName, nameWidth + this.x + 16, this.y + 34);
     }
 
