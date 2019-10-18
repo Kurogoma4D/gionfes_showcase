@@ -9,7 +9,7 @@ LinkedList<TweetTile> tweets;
 boolean isUpdating = false;
 boolean isKeyPressed = false;
 ArrayList<String> images = new ArrayList<String>();
-ArrayList<TweetData> list = new ArrayList<TweetData>();
+LinkedList<TweetData> list = new LinkedList<TweetData>();
 PFont font;
 
 void setup() {
@@ -31,7 +31,7 @@ void draw() {
 
     if (isKeyPressed == true && isUpdating == false) {
         isUpdating = true;
-        requestTweet();
+        thread("requestTweet");
     }
     if (isUpdating == false) {
         updateTweet();

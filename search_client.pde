@@ -1,4 +1,5 @@
 import http.requests.*;
+import java.util.LinkedList;
 
 public class SearchClient {
     private String token;
@@ -13,9 +14,9 @@ public class SearchClient {
         this.token = token;
     }
 
-    public ArrayList<TweetData> request(){
-        ArrayList<TweetData> tweets = new ArrayList<TweetData>();
-        GetRequest get = new GetRequest("https://api.twitter.com/1.1/search/tweets.json?q="+query);
+    public LinkedList<TweetData> request(){
+        LinkedList<TweetData> tweets = new LinkedList<TweetData>();
+        GetRequest get = new GetRequest("https://api.twitter.com/1.1/search/tweets.json?q="+query+"&count=5");
         get.addHeader("Host","api.twitter.com");
         get.addHeader("Authorization","Bearer "+this.token);
         get.send();
@@ -23,9 +24,7 @@ public class SearchClient {
         JSONObject response = parseJSONObject(get.getContent());
         JSONArray statuses = response.getJSONArray("statuses");
         
-        // get 5 tweets from upper
         for (int i = 0; i < statuses.size(); i++) {
-            if (i >= 5) break;
             JSONObject tweet = statuses.getJSONObject(i);
             StringDict data = new StringDict();
             data.set("id", tweet.getString("id_str"));
