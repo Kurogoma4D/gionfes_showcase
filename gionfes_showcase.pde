@@ -27,6 +27,8 @@ void setup() {
     font = createFont("IPAexGothic", 18, true);
     display.setup();
     baseTime = millis();
+    isUpdating = true;
+    thread("requestTweet");
 }
 
 void draw() {
