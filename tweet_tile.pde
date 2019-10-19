@@ -20,7 +20,8 @@ class TweetTile {
     }
 
     public void draw() {
-        fill(255, 200);
+        blendMode(BLEND);
+        fill(255, 120);
         noStroke();
         rect(this.x, this.y, this.width, this.height, 8);
         if (this.data.media != null) {
@@ -34,7 +35,7 @@ class TweetTile {
         text(this.data.text, this.x + 16, this.y + this.height / 3 + 12, this.width - 22, this.height * 2 / 3);
         textSize(20);
         text(this.data.name, this.x + 16, this.y + 36);
-        fill(120);
+        fill(40);
         float nameWidth = textWidth(this.data.name);
         textSize(16);
         text(" @"+this.data.screenName, nameWidth + this.x + 16, this.y + 34);

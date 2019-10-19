@@ -1,19 +1,23 @@
 public class Display {
 
-    // private PShader backgroundAnimation;
+    private Bubble[] bubbles = new Bubble[MAX_PARTICLES];
 
-    Display(){}
-
-    public void setup() {
-        // this.backgroundAnimation = loadShader("base.frag");
+    Display(){
+        for (int i = 0; i < MAX_PARTICLES; i++) {
+            bubbles[i] = new Bubble(pixelWidth/2, pixelHeight/2);
+        }
     }
 
     public void draw() {
-        // this.backgroundAnimation.set("time", millis() / 1000.0);
-        // this.backgroundAnimation.set("resolution", (float)pixelWidth, (float)pixelHeight);
-        // shader(this.backgroundAnimation);
-        fill(20);
+        fill(12);
+        noStroke();
         rect(0, 0, pixelWidth, pixelHeight);
 
+        for (int i = 0; i < MAX_PARTICLES; i++) {
+            bubbles[i].draw();
+            if (bubbles[i].isDead == true) {
+                bubbles[i] = new Bubble(pixelWidth/2, pixelHeight/2);
+            }
+        }
     }
 }

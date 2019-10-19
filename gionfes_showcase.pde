@@ -13,6 +13,7 @@ ArrayList<String> images = new ArrayList<String>();
 LinkedList<TweetData> list = new LinkedList<TweetData>();
 PFont font;
 int baseTime = 0;
+final int MAX_PARTICLES = 45;
 
 void setup() {
     // size(1280, 720);
@@ -25,7 +26,6 @@ void setup() {
     display = new Display();
     tweets = new LinkedList<TweetTile>();
     font = createFont("IPAexGothic", 18, true);
-    display.setup();
     baseTime = millis();
     isUpdating = true;
     thread("requestTweet");
