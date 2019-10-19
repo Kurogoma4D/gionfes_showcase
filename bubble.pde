@@ -27,10 +27,11 @@ public class Bubble {
         this.move();
 
         blendMode(ADD);
-        fill(255, 0);
-        stroke(colorRGB.x, colorRGB.y, colorRGB.z, opacity);
+        noStroke();
+        fill(colorRGB.x, colorRGB.y, colorRGB.z, opacity);
+        // stroke(colorRGB.x, colorRGB.y, colorRGB.z, opacity);
         ellipse(position.x, position.y, radius, radius);
-        stroke(colorRGB.x, colorRGB.y, colorRGB.z, max(opacity - 40, 0));
+        fill(255, max(opacity - 100, 0));
         pushMatrix();
         translate(position.x, position.y);
         ellipse(radius / 5 * cos(PI / 128 * lifeTime * rotateDirection),
@@ -70,5 +71,10 @@ public class Bubble {
 
     private PVector getRandomDirection() {
         return PVector.fromAngle(random(0, TWO_PI)).mult(random(2.0, 4.5));
+    }
+
+    public void addForce(float force) {
+        PVector forceVector = center.cross(position).normalize().mult(force);
+        velocity.add(forceVector);
     }
 }

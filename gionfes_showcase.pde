@@ -67,6 +67,13 @@ void updateTweet() {
         newTweets.add(new TweetTile(i, newTweet));
     }
 
+    if (tweets.size() != 0) {
+        String latest = tweets.get(0).getData().id;
+        if (latest != newTweets.get(0).getData().id) {
+            display.addBubbleForce();
+        }
+    }
+
     tweets = newTweets;
     updateFlag = false;
 }
