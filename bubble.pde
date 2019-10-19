@@ -10,6 +10,7 @@ public class Bubble {
     private int opacity = 180;
     public boolean isDead = false;
     private int maxLife;
+    private float rotateDirection;
 
     Bubble(int x, int y){
         position = new PVector(x, y);
@@ -19,6 +20,7 @@ public class Bubble {
         radius = int(random(40, 80));
         colorRGB = new PVector(random(0.2, 0.9) * 255, random(0.2, 0.9) * 255, random(0.2, 0.9) * 255);
         maxLife = int(random(250, 800));
+        rotateDirection = Math.signum(radius - 60);
     }
 
     public void draw() {
@@ -31,7 +33,10 @@ public class Bubble {
         stroke(colorRGB.x, colorRGB.y, colorRGB.z, max(opacity - 40, 0));
         pushMatrix();
         translate(position.x, position.y);
-        ellipse(-radius / 5, -radius / 5, radius / 4, radius / 4);
+        ellipse(radius / 5 * cos(PI / 128 * lifeTime * rotateDirection),
+            radius / 5 * sin(PI / 128 * lifeTime * rotateDirection),
+            radius / 4,
+            radius / 4);
         popMatrix();
 
         lifeTime += 1;
@@ -59,6 +64,8 @@ public class Bubble {
             direction.rotate(random(-HALF_PI / 3, HALF_PI / 3));
             velocity = direction;
         }
+        float salt = (noise(lifeTime + colorRGB.x - colorRGB.y) - 0.5) * 0.4;
+        velocity.set(direction.add(new PVector(salt, salt)));
     }
 
     private PVector getRandomDirection() {
