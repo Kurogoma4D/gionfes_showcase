@@ -5,21 +5,24 @@ public class Bubble {
     private PVector velocity;
     private PVector direction;
     private PVector center;
-    private PVector colorRGB;
+    private PVector colorRGB = new PVector(random(0.2, 0.9) * 255, random(0.2, 0.9) * 255, random(0.2, 0.9) * 255);
     private int lifeTime = 0;
-    private int opacity = 180;
+    private int opacity;
     public boolean isDead = false;
     private int maxLife;
     private float rotateDirection;
+    private boolean isBackground;
 
-    Bubble(int x, int y){
+    Bubble(int x, int y, PVector fixedColor, int fixedOpacity, int fixedMaxLife, boolean isBackground){
         position = new PVector(x, y);
         direction = getRandomDirection();
         velocity = direction;
         center = new PVector(pixelWidth/2, pixelHeight/2);
-        radius = int(random(40, 80));
-        colorRGB = new PVector(random(0.2, 0.9) * 255, random(0.2, 0.9) * 255, random(0.2, 0.9) * 255);
-        maxLife = int(random(250, 800));
+        this.isBackground = isBackground;
+        radius = isBackground ? int(random(40, 80)) : int(random(10, 40));
+        colorRGB = fixedColor ? fixedColor : colorRGB;
+        maxLife = fixedMaxLife ? fixedMaxLife : int(random(250, 800));
+        opacity = fixedOpacity ? fixedOpacity : 180;
         rotateDirection = Math.signum(radius - 60);
     }
 
@@ -31,14 +34,16 @@ public class Bubble {
         fill(colorRGB.x, colorRGB.y, colorRGB.z, opacity);
         // stroke(colorRGB.x, colorRGB.y, colorRGB.z, opacity);
         ellipse(position.x, position.y, radius, radius);
-        fill(255, max(opacity - 100, 0));
-        pushMatrix();
-        translate(position.x, position.y);
-        ellipse(radius / 5 * cos(PI / 128 * lifeTime * rotateDirection),
-            radius / 5 * sin(PI / 128 * lifeTime * rotateDirection),
-            radius / 4,
-            radius / 4);
-        popMatrix();
+        if (isBackground) {
+            fill(255, max(opacity - 100, 0));
+            pushMatrix();
+            translate(position.x, position.y);
+            ellipse(radius / 5 * cos(PI / 128 * lifeTime * rotateDirection),
+                radius / 5 * sin(PI / 128 * lifeTime * rotateDirection),
+                radius / 4,
+                radius / 4);
+            popMatrix();
+        }
 
         lifeTime += 1;
         if (lifeTime > maxLife) {
