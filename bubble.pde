@@ -74,7 +74,12 @@ public class Bubble {
     }
 
     public void addForce(float force) {
-        PVector forceVector = center.cross(position).normalize().mult(force);
-        velocity.add(forceVector);
+        if (force > 1.0) {
+            PVector forceVector = new PVector(pixelWidth / 2, pixelHeight / 5).cross(position).normalize().mult(force);
+            velocity.add(forceVector);
+        } else {
+            PVector forceVector = new PVector(pixelWidth / 2, pixelHeight / 5).cross(position).normalize().mult(2.5 - force);
+            velocity.sub(forceVector);
+        }
     }
 }
