@@ -15,6 +15,7 @@ PFont font;
 int baseTime = 0;
 final int MAX_PARTICLES = 20;
 final int MAX_PARTICLES_TILE = 120;
+float floatTime = 0.0;
 
 void setup() {
     // size(1280, 720);
@@ -33,7 +34,9 @@ void setup() {
 }
 
 void draw() {
-    display.draw();
+    fill(3, map(sin(floatTime), -1, 1, 15, 55), 68);
+    noStroke();
+    rect(0, 0, pixelWidth, pixelHeight);
 
     int now = millis();
     if (now - baseTime > 15000 && isUpdating == false) {
@@ -49,9 +52,13 @@ void draw() {
             tweet.draw();
         }
     }
+    
+    display.draw();
 
     fill(255);
     text(baseTime + "  " + now + "  " + frameRate, 18, pixelHeight - 24);
+
+    floatTime += 0.01;
 }
 
 void requestTweet() {

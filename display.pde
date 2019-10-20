@@ -10,10 +10,6 @@ public class Display {
     }
 
     public void draw() {
-        fill(12);
-        noStroke();
-        rect(0, 0, pixelWidth, pixelHeight);
-
         for (int i = 0; i < MAX_PARTICLES; i++) {
             if (force > 0.0) {
                 bubbles[i].addForce(force);

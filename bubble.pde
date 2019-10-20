@@ -29,11 +29,11 @@ public class Bubble {
     public void draw() {
         this.move();
 
-        if (isBackground) {
-            blendMode(ADD);
-        } else {
-            blendMode(BLEND);
-        }
+        // if (isBackground) {
+        //     blendMode(ADD);
+        // } else {
+        //     blendMode(BLEND);
+        // }
         noStroke();
         fill(colorRGB.x, colorRGB.y, colorRGB.z, opacity);
         // stroke(colorRGB.x, colorRGB.y, colorRGB.z, opacity);
