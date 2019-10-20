@@ -5,7 +5,7 @@ public class Display {
 
     Display(){
         for (int i = 0; i < MAX_PARTICLES; i++) {
-            bubbles[i] = new Bubble(pixelWidth/2, pixelHeight/2);
+            bubbles[i] = new Bubble(pixelWidth/2, pixelHeight/2, null, 180, 0, true);
         }
     }
 
@@ -20,7 +20,7 @@ public class Display {
             }
             bubbles[i].draw();
             if (bubbles[i].isDead == true) {
-                bubbles[i] = new Bubble(pixelWidth/2, pixelHeight/2);
+                bubbles[i] = new Bubble(pixelWidth/2, pixelHeight/2, null, 180, 0, true);
             }
         }
 

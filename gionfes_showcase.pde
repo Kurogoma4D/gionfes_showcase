@@ -14,6 +14,7 @@ LinkedList<TweetData> list = new LinkedList<TweetData>();
 PFont font;
 int baseTime = 0;
 final int MAX_PARTICLES = 45;
+final int MAX_PARTICLES_TILE = 120;
 
 void setup() {
     // size(1280, 720);
