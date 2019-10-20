@@ -20,9 +20,9 @@ public class Bubble {
         center = new PVector(pixelWidth/2, pixelHeight/2);
         this.isBackground = isBackground;
         radius = isBackground ? int(random(40, 80)) : int(random(10, 40));
-        colorRGB = fixedColor ? fixedColor : colorRGB;
-        maxLife = fixedMaxLife ? fixedMaxLife : int(random(250, 800));
-        opacity = fixedOpacity ? fixedOpacity : 180;
+        colorRGB = (fixedColor != null) ? fixedColor : colorRGB;
+        maxLife = (fixedMaxLife != 0) ? fixedMaxLife : int(random(250, 800));
+        opacity = (fixedOpacity != 0) ? fixedOpacity : 180;
         rotateDirection = Math.signum(radius - 60);
     }
 
