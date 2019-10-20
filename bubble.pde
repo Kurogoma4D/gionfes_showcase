@@ -19,7 +19,7 @@ public class Bubble {
         velocity = direction;
         center = new PVector(pixelWidth/2, pixelHeight/2);
         this.isBackground = isBackground;
-        radius = isBackground ? int(random(40, 80)) : int(random(10, 40));
+        radius = isBackground ? int(random(40, 80)) : int(random(4, 8));
         colorRGB = (fixedColor != null) ? fixedColor : colorRGB;
         maxLife = (fixedMaxLife != 0) ? fixedMaxLife : int(random(250, 800));
         opacity = (fixedOpacity != 0) ? fixedOpacity : 180;
@@ -29,7 +29,11 @@ public class Bubble {
     public void draw() {
         this.move();
 
-        blendMode(ADD);
+        if (isBackground) {
+            blendMode(ADD);
+        } else {
+            blendMode(BLEND);
+        }
         noStroke();
         fill(colorRGB.x, colorRGB.y, colorRGB.z, opacity);
         // stroke(colorRGB.x, colorRGB.y, colorRGB.z, opacity);
@@ -70,8 +74,13 @@ public class Bubble {
             direction.rotate(random(-HALF_PI / 3, HALF_PI / 3));
             velocity = direction;
         }
-        float salt = (noise(lifeTime + colorRGB.x - colorRGB.y) - 0.5) * 0.4;
-        velocity.set(direction.add(new PVector(salt, salt)));
+
+        if (isBackground) {
+            float salt = (noise(lifeTime + colorRGB.x - colorRGB.y) - 0.5) * 0.4;
+            velocity.set(direction.add(new PVector(salt, salt)));
+        } else {
+            velocity.set(direction.mult(0.94));            
+        }
     }
 
     private PVector getRandomDirection() {
