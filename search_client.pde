@@ -3,7 +3,7 @@ import java.util.LinkedList;
 
 public class SearchClient {
     private String token;
-    private final String query = "血液クレンジング";
+    private final String query = "%23北海道民検定";
     // private final String query = "%23gion";
 
     SearchClient(String token) {
@@ -16,7 +16,7 @@ public class SearchClient {
 
     public LinkedList<TweetData> request(){
         LinkedList<TweetData> tweets = new LinkedList<TweetData>();
-        GetRequest get = new GetRequest("https://api.twitter.com/1.1/search/tweets.json?q="+query+"&count=5");
+        GetRequest get = new GetRequest("https://api.twitter.com/1.1/search/tweets.json?q="+query+"&count=4");
         get.addHeader("Host","api.twitter.com");
         get.addHeader("Authorization","Bearer "+this.token);
         get.send();

@@ -6,7 +6,7 @@ class TweetTile {
     public float width;
     public float height;
     private float margin = 36;
-    private float horizontalMargin = 150;
+    private float horizontalMargin = 120;
     private float base = 20;
     private Bubble[] bubbles = new Bubble[MAX_PARTICLES_TILE];
 
@@ -15,7 +15,7 @@ class TweetTile {
         this.index = index;
         //TODO: styling
         this.width = pixelWidth - this.horizontalMargin * 2;
-        this.height = (pixelHeight - this.margin * 6) / 5.0;
+        this.height = (pixelHeight - this.margin * 6) / 4.0;
         this.x = this.horizontalMargin;
         this.y = (this.height + this.margin) * index + this.margin;
 
@@ -35,14 +35,14 @@ class TweetTile {
             tint(255, 180);
             image(this.data.media, (this.width - this.data.media.width - 8 + this.x), this.y);
         }
-        textFont(font, 16);
+        textFont(font, 18);
         fill(0);
-        text(this.data.text, this.x + 16, this.y + this.height / 3 + 12, this.width - 22, this.height * 2 / 3);
-        textSize(20);
+        text(this.data.text, this.x + 16, this.y + this.height / 4 + 10, this.width - 22, this.height * 2 / 3);
+        textSize(22);
         text(this.data.name, this.x + 16, this.y + 36);
         fill(40);
         float nameWidth = textWidth(this.data.name);
-        textSize(16);
+        textSize(18);
         text(" @"+this.data.screenName, nameWidth + this.x + 16, this.y + 34);
 
         for (int i = 0; i < MAX_PARTICLES_TILE; i++) {

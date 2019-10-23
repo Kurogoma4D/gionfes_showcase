@@ -19,7 +19,7 @@ float floatTime = 0.0;
 
 void setup() {
     // size(1280, 720);
-    fullScreen(P2D, 2);
+    fullScreen(P2D, 1);
     smooth(2);
     OAuth auth = new OAuth();
     token = auth.getBearerToken();
