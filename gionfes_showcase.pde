@@ -13,7 +13,7 @@ ArrayList<String> images = new ArrayList<String>();
 LinkedList<TweetData> list = new LinkedList<TweetData>();
 PFont font;
 int baseTime = 0;
-final int MAX_PARTICLES = 20;
+final int MAX_PARTICLES = 10;
 final int MAX_PARTICLES_TILE = 120;
 float floatTime = 0.0;
 PImage globalCircleMaskImage;
@@ -81,7 +81,7 @@ void updateTweet() {
 
     if (tweets.size() != 0) {
         String latest = tweets.get(0).getData().id;
-        if (latest != newTweets.get(0).getData().id) {
+        if (!latest.equals(newTweets.get(0).getData().id)) {
             display.addBubbleForce();
         }
     }

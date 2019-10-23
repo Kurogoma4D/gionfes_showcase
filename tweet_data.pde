@@ -13,10 +13,10 @@ public class TweetData {
         screenName = props.get("screenName");
         String mediaUrl = props.get("mediaUrl");
         String profileUrl = props.get("profileImageUrl");
-        if (mediaUrl != "") {
+        if (!mediaUrl.equals("")) {
             media = loadImage(mediaUrl);
         }
-        if (profileUrl != "") {
+        if (!profileUrl.equals("")) {
             profileImage = loadImage(profileUrl);
         }
     }
