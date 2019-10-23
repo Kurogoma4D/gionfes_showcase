@@ -35,15 +35,23 @@ class TweetTile {
             tint(255, 180);
             image(this.data.media, (this.width - this.data.media.width - 8 + this.x), this.y);
         }
+        float aviSize = this.height - 32;
+        if (this.data.profileImage != null) {
+            imageMode(CORNER);
+            globalCircleMaskImage.resize(0, int(aviSize));
+            this.data.profileImage.resize(0, int(aviSize));
+            this.data.profileImage.mask(globalCircleMaskImage);
+            image(this.data.profileImage, this.x + 16, this.y + 16);
+        }
         textFont(font, 18);
         fill(0);
-        text(this.data.text, this.x + 16, this.y + this.height / 4 + 10, this.width - 22, this.height * 2 / 3);
+        text(this.data.text, this.x + 32 + aviSize, this.y + this.height / 4 + 10, this.width - 32 - aviSize, this.height * 2 / 3);
         textSize(22);
-        text(this.data.name, this.x + 16, this.y + 36);
+        text(this.data.name, this.x + 32 +aviSize, this.y + 36);
         fill(40);
         float nameWidth = textWidth(this.data.name);
         textSize(18);
-        text(" @"+this.data.screenName, nameWidth + this.x + 16, this.y + 34);
+        text(" @"+this.data.screenName, nameWidth + this.x + 32 + aviSize, this.y + 34);
 
         for (int i = 0; i < MAX_PARTICLES_TILE; i++) {
             bubbles[i].draw();

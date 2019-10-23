@@ -16,6 +16,7 @@ int baseTime = 0;
 final int MAX_PARTICLES = 20;
 final int MAX_PARTICLES_TILE = 120;
 float floatTime = 0.0;
+PImage globalCircleMaskImage;
 
 void setup() {
     // size(1280, 720);
@@ -28,6 +29,9 @@ void setup() {
     display = new Display();
     tweets = new LinkedList<TweetTile>();
     font = createFont("IPAexGothic", 18, true);
+
+    globalCircleMaskImage = loadImage("data/mask.png");
+
     baseTime = millis();
     isUpdating = true;
     thread("requestTweet");

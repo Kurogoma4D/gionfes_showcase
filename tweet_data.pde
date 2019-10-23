@@ -3,7 +3,7 @@ public class TweetData {
     public String text;
     public String name;
     public String screenName;
-    public String profileImageUrl;
+    public PImage profileImage;
     public PImage media;
 
     TweetData(StringDict props){
@@ -11,10 +11,13 @@ public class TweetData {
         text = props.get("text");
         name = props.get("name");
         screenName = props.get("screenName");
-        profileImageUrl = props.get("profileImageUrl");
-        String url = props.get("mediaUrl");
-        if (url != "") {
-            media = loadImage(url);
+        String mediaUrl = props.get("mediaUrl");
+        String profileUrl = props.get("profileImageUrl");
+        if (mediaUrl != "") {
+            media = loadImage(mediaUrl);
+        }
+        if (profileUrl != "") {
+            profileImage = loadImage(profileUrl);
         }
     }
 }
