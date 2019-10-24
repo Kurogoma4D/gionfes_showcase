@@ -3,7 +3,7 @@ import java.util.LinkedList;
 
 public class SearchClient {
     private String token;
-    private final String query = "%23絶対に今すぐやめるべきこと";
+    private final String query = "ジャンプ禁止";
     // private final String query = "%23gion";
 
     SearchClient(String token) {

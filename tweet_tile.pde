@@ -38,6 +38,7 @@ class TweetTile {
         float aviSize = this.height - 32;
         if (this.data.profileImage != null) {
             imageMode(CORNER);
+            globalCircleMaskImage.resize(this.data.profileImage.width, this.data.profileImage.height);
             this.data.profileImage.mask(globalCircleMaskImage);
             this.data.profileImage.resize(0, int(aviSize));
             image(this.data.profileImage, this.x + 16, this.y + 16);
