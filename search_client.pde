@@ -28,6 +28,7 @@ public class SearchClient {
             JSONObject tweet = statuses.getJSONObject(i);
             StringDict data = new StringDict();
             data.set("id", tweet.getString("id_str"));
+            print(data.get("id")+" ");
             String text = tweet.getString("text")
                             .replaceAll("\n", "")
                             .replaceFirst("https://t.*", "");
@@ -45,6 +46,7 @@ public class SearchClient {
 
             tweets.add(new TweetData(data));
         }
+        println("");
 
         return tweets;
     }
