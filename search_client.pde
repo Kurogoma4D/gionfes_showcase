@@ -16,7 +16,7 @@ public class SearchClient {
 
     public LinkedList<TweetData> request(){
         LinkedList<TweetData> tweets = new LinkedList<TweetData>();
-        GetRequest get = new GetRequest("https://api.twitter.com/1.1/search/tweets.json?q="+query+"&count=4");
+        GetRequest get = new GetRequest("https://api.twitter.com/1.1/search/tweets.json?q="+query);
         get.addHeader("Host","api.twitter.com");
         get.addHeader("Authorization","Bearer "+this.token);
         get.send();
@@ -24,7 +24,8 @@ public class SearchClient {
         JSONObject response = parseJSONObject(get.getContent());
         JSONArray statuses = response.getJSONArray("statuses");
         
-        for (int i = 0; i < statuses.size(); i++) {
+        int responseSize = min(statuses.size(), 4);
+        for (int i = 0; i < responseSize; i++) {
             JSONObject tweet = statuses.getJSONObject(i);
             StringDict data = new StringDict();
             data.set("id", tweet.getString("id_str"));
