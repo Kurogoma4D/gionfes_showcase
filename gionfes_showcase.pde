@@ -31,6 +31,7 @@ void setup() {
     font = createFont("IPAexGothic", 18, true);
 
     globalCircleMaskImage = loadImage("data/mask.png");
+    globalCircleMaskImage.resize(48, 48);
 
     baseTime = millis();
     isUpdating = true;
