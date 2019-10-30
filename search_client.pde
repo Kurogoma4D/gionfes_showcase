@@ -3,8 +3,8 @@ import java.util.LinkedList;
 
 public class SearchClient {
     private String token;
-    private final String query = "ジャンプ禁止";
-    // private final String query = "%23gion";
+    private final String query = "%23木更津高専文化祭+OR+%23gionsai2019";
+    // private final String query = "ペイペイドーム";
 
     SearchClient(String token) {
         setToken(token);
@@ -16,7 +16,7 @@ public class SearchClient {
 
     public LinkedList<TweetData> request(){
         LinkedList<TweetData> tweets = new LinkedList<TweetData>();
-        GetRequest get = new GetRequest("https://api.twitter.com/1.1/search/tweets.json?q="+query);
+        GetRequest get = new GetRequest("https://api.twitter.com/1.1/search/tweets.json?q="+query+"+exclude:retweets");
         get.addHeader("Host","api.twitter.com");
         get.addHeader("Authorization","Bearer "+this.token);
         get.send();
@@ -24,7 +24,7 @@ public class SearchClient {
         JSONObject response = parseJSONObject(get.getContent());
         JSONArray statuses = response.getJSONArray("statuses");
         
-        int responseSize = min(statuses.size(), 4);
+        int responseSize = min(statuses.size(), 5);
         for (int i = 0; i < responseSize; i++) {
             JSONObject tweet = statuses.getJSONObject(i);
             StringDict data = new StringDict();
@@ -32,6 +32,9 @@ public class SearchClient {
             String text = tweet.getString("text")
                             .replaceAll("\n", "")
                             .replaceFirst("https://t.*", "");
+            if (text.length() > 60) {
+                text = text.substring(0, 60);
+            }
             data.set("text", text);
             JSONObject user = tweet.getJSONObject("user");
             data.set("name", user.getString("name"));

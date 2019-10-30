@@ -15,7 +15,7 @@ class TweetTile {
         this.index = index;
         //TODO: styling
         this.width = pixelWidth - this.horizontalMargin * 2;
-        this.height = (pixelHeight - this.margin * 6) / 4.0;
+        this.height = (pixelHeight - this.margin * 6) / 5.0;
         this.x = this.horizontalMargin;
         this.y = (this.height + this.margin) * index + this.margin;
 
