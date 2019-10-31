@@ -97,5 +97,7 @@ void updateTweet() {
 }
 
 void movieEvent(Movie m) {
-  m.read();
+    if (m == backgroundMovie) {
+        backgroundMovie.read();
+    }
 }
