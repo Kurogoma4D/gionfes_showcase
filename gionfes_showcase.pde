@@ -69,6 +69,7 @@ void draw() {
     text(baseTime + "  " + now + "  " + frameRate, 18, pixelHeight - 24);
 
     floatTime += 0.01;
+    backgroundMovie.read();
 }
 
 void requestTweet() {
@@ -94,10 +95,4 @@ void updateTweet() {
 
     tweets = newTweets;
     updateFlag = false;
-}
-
-void movieEvent(Movie m) {
-    if (m == backgroundMovie) {
-        backgroundMovie.read();
-    }
 }
