@@ -1,6 +1,7 @@
 import http.requests.*;
 import java.util.LinkedList;
 import java.util.Collections;
+import processing.video.*;
 
 String token;
 SearchClient client;
@@ -17,6 +18,7 @@ final int MAX_PARTICLES = 10;
 final int MAX_PARTICLES_TILE = 120;
 float floatTime = 0.0;
 PImage globalCircleMaskImage;
+Movie backgroundMovie;
 
 void setup() {
     // size(1280, 720);
@@ -33,15 +35,18 @@ void setup() {
     globalCircleMaskImage = loadImage("data/mask.png");
     globalCircleMaskImage.resize(48, 48);
 
+    backgroundMovie = new Movie(this, "sample.mov");
+    backgroundMovie.loop();
+
     baseTime = millis();
     isUpdating = true;
     thread("requestTweet");
 }
 
 void draw() {
-    fill(3, map(sin(floatTime), -1, 1, 15, 55), 68);
-    noStroke();
-    rect(0, 0, pixelWidth, pixelHeight);
+    tint(80, 120);
+    image(backgroundMovie, 0, 0, pixelWidth, pixelHeight);
+    noTint();
 
     int now = millis();
     if (now - baseTime > 15000 && isUpdating == false) {
@@ -89,4 +94,8 @@ void updateTweet() {
 
     tweets = newTweets;
     updateFlag = false;
+}
+
+void movieEvent(Movie m) {
+  m.read();
 }
