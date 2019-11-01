@@ -30,7 +30,7 @@ public class SearchClient {
             StringDict data = new StringDict();
             data.set("id", tweet.getString("id_str"));
             String text = tweet.getString("text")
-                            .replaceAll("\n", "")
+                            .replaceAll("\n", " ")
                             .replaceFirst("https://t.*", "");
             if (text.length() > 60) {
                 text = text.substring(0, 60);
