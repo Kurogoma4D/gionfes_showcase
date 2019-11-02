@@ -5,8 +5,8 @@ class TweetTile {
     public float y;
     public float width;
     public float height;
-    private float margin = 36;
-    private float horizontalMargin = 120;
+    private float margin = 32;
+    private float horizontalMargin = 240;
     private float base = 20;
     private Bubble[] bubbles = new Bubble[MAX_PARTICLES_TILE];
 
@@ -15,13 +15,13 @@ class TweetTile {
         this.index = index;
         //TODO: styling
         this.width = pixelWidth - this.horizontalMargin * 2;
-        this.height = (pixelHeight - this.margin * 6) / 5.0;
+        this.height = (pixelHeight - this.margin * 6) / 11.0;
         this.x = this.horizontalMargin;
         this.y = (this.height + this.margin) * index + this.margin;
 
-        for (int i = 0; i < MAX_PARTICLES_TILE; i++) {
-            bubbles[i] = generateBubble(i);
-        }
+        //for (int i = 0; i < MAX_PARTICLES_TILE; i++) {
+        //    bubbles[i] = generateBubble(i);
+        //}
     }
 
     public void draw() {
@@ -43,22 +43,22 @@ class TweetTile {
             this.data.profileImage.resize(0, int(aviSize));
             image(this.data.profileImage, this.x + 16, this.y + 16);
         }
-        textFont(font, 24);
-        fill(10);
-        text(this.data.text, this.x + 32 + aviSize, this.y + this.height / 4 + 10, this.width - 32 - aviSize, this.height * 2 / 3);
-        textSize(22);
-        text(this.data.name, this.x + 32 + aviSize, this.y + 36);
+        textFont(font, 42);
         fill(40);
-        float nameWidth = textWidth(this.data.name);
-        textSize(18);
-        text(" @"+this.data.screenName, nameWidth + this.x + 32 + aviSize, this.y + 34);
+        text(this.data.text, this.x + 48 + aviSize, this.y + this.height / 5, this.width - 32 - aviSize, this.height * 2 / 3);
+        //textSize(38);
+        //text(this.data.name, this.x + 48 + aviSize, this.y + 48);
+        //fill(60);
+        //float nameWidth = textWidth(this.data.name);
+        //textSize(28);
+        //text(" @"+this.data.screenName, nameWidth + this.x + 60 + aviSize, this.y + 40);
 
-        for (int i = 0; i < MAX_PARTICLES_TILE; i++) {
-            bubbles[i].draw();
-            if (bubbles[i].isDead == true) {
-                bubbles[i] = generateBubble(i);
-            }
-        }
+        //for (int i = 0; i < MAX_PARTICLES_TILE; i++) {
+        //    bubbles[i].draw();
+        //    if (bubbles[i].isDead == true) {
+        //        bubbles[i] = generateBubble(i);
+        //    }
+        //}
     }
 
     public TweetData getData() {

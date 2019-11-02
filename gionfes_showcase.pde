@@ -14,7 +14,7 @@ ArrayList<String> images = new ArrayList<String>();
 LinkedList<TweetData> list = new LinkedList<TweetData>();
 PFont font;
 int baseTime = 0;
-final int MAX_PARTICLES = 10;
+final int MAX_PARTICLES = 16;
 final int MAX_PARTICLES_TILE = 120;
 float floatTime = 0.0;
 PImage globalCircleMaskImage;
@@ -22,7 +22,8 @@ Movie backgroundMovie;
 
 void setup() {
     // size(1280, 720);
-    fullScreen(P2D, 1);
+    fullScreen(P2D, 2);
+    frameRate(30);
     smooth(2);
     OAuth auth = new OAuth();
     token = auth.getBearerToken();
@@ -35,7 +36,7 @@ void setup() {
     globalCircleMaskImage = loadImage("data/mask.png");
     globalCircleMaskImage.resize(48, 48);
 
-    backgroundMovie = new Movie(this, "sample.mov");
+    backgroundMovie = new Movie(this, "render.mp4");
     backgroundMovie.loop();
 
     baseTime = millis();
@@ -44,7 +45,6 @@ void setup() {
 }
 
 void draw() {
-    tint(80, 120);
     image(backgroundMovie, 0, 0, pixelWidth, pixelHeight);
     noTint();
 
@@ -65,8 +65,8 @@ void draw() {
     
     display.draw();
 
-    fill(255);
-    text(baseTime + "  " + now + "  " + frameRate, 18, pixelHeight - 24);
+    //fill(255);
+    //text(baseTime + "  " + now + "  " + frameRate, 18, pixelHeight - 24);
 
     floatTime += 0.01;
     backgroundMovie.read();

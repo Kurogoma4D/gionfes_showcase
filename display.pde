@@ -27,6 +27,6 @@ public class Display {
     }
 
     public void addBubbleForce() {
-        force = 2.0;
+        force = 3.0;
     }
 }

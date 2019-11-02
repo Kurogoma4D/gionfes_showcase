@@ -19,7 +19,7 @@ public class Bubble {
         velocity = direction;
         center = new PVector(pixelWidth/2, pixelHeight/2);
         this.isBackground = isBackground;
-        radius = isBackground ? int(random(40, 80)) : int(random(4, 8));
+        radius = isBackground ? int(random(120, 180)) : int(random(4, 8));
         colorRGB = (fixedColor != null) ? fixedColor : colorRGB;
         maxLife = (fixedMaxLife != 0) ? fixedMaxLife : int(random(250, 800));
         opacity = (fixedOpacity != 0) ? fixedOpacity : 180;
