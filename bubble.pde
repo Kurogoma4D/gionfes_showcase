@@ -29,14 +29,8 @@ public class Bubble {
     public void draw() {
         this.move();
 
-        // if (isBackground) {
-        //     blendMode(ADD);
-        // } else {
-        //     blendMode(BLEND);
-        // }
         noStroke();
         fill(colorRGB.x, colorRGB.y, colorRGB.z, opacity);
-        // stroke(colorRGB.x, colorRGB.y, colorRGB.z, opacity);
         ellipse(position.x, position.y, radius, radius);
         if (isBackground) {
             fill(255, max(opacity - 100, 0));

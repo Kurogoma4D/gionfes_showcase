@@ -4,7 +4,6 @@ import java.util.LinkedList;
 public class SearchClient {
     private String token;
     private final String query = "%23木更津高専文化祭+OR+%23gionsai2019";
-     //private final String query = "ペイペイドーム";
 
     SearchClient(String token) {
         setToken(token);
@@ -32,9 +31,7 @@ public class SearchClient {
             String text = tweet.getString("text")
                             .replaceAll("\n", " ")
                             .replaceFirst("https://t.*", "");
-            //if (text.length() > 60) {
-            //    text = text.substring(0, 60);
-            //}
+                            
             data.set("text", text);
             JSONObject user = tweet.getJSONObject("user");
             data.set("name", user.getString("name"));
